@@ -1,0 +1,409 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>逃离地球的博客</title>
+<link rel="shortcut icon" href="https://yangqianrui.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://yangqianrui.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://yangqianrui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="逃离地球的博客 - Atom Feed" href="https://yangqianrui.github.io/atom.xml">
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158963700-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-158963700-1');
+  </script>
+    
+
+  <meta name="description" content="温故而知新" />
+</head>
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+
+    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+      <a href="/" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        首页
+      </a>
+    
+      <a href="/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        归档
+      </a>
+    
+      <a href="/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        标签
+      </a>
+    
+      <a href="/post/about" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        关于
+      </a>
+    
+      <a href="https://yangqianrui.github.io/post/Links" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        友链
+      </a>
+    
+    <a href="https://yangqianrui.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
+</div>
+
+    <div class="max-w-4xl w-full mx-auto ">
+      
+        <header class="flex py-16 md:py-32 mt-12 flex-col md:flex-row px-4 md:px-0 animated fadeIn">
+  <div class="flex-1 order-2 md:order-1 md:pr-16">
+    <div class="text-4xl font-bold text-center md:text-left">
+      逃离地球的博客
+    </div>
+    <div class="text-xl text-gray-500 mt-4 text-center md:text-left">
+      温故而知新
+    </div>
+    
+      <div class="mt-8 text-center md:text-left">
+        <a
+          href="/post/about" 
+          arget="_blank"
+          class="text-sm bg-yellow-50 dark:bg-indigo-500 dark:text-gray-700 font-semibold px-4 py-2 inline-block yellow-btn transition-fast rounded"
+        >LET&#39;S TALK!</a>
+      </div>
+    
+    
+      <div class="mt-8 flex items-center">
+        
+          <div class="text-gray-500 mr-2">
+            Follow me 👉
+          </div>
+        
+        
+          
+            
+              <div class="relative mr-2 w-8 h-8 inline-flex items-center justify-center text-xl hover:bg-gray-200 transition-fast dark:hover:bg-gray-600 wechat">
+                <i class="ri-wechat-line"></i>
+                <img src="\media\images\custom-wechat.jpg" alt="" class="absolute left-0 w-32" style="max-width: initial; top: 100%;" >
+              </div>
+            
+          
+        
+          
+            
+              <a href="mailto:yangqianrui0626@qq.com" target="_blank" class="mr-2 w-8 h-8 inline-flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast">
+                <i class="ri-mail-line"></i>
+              </a>
+            
+          
+        
+          
+            
+              <a href="https://github.com/yangqianrui" target="_blank" class="mr-2 w-8 h-8 inline-flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast">
+                <i class="ri-github-line"></i>
+              </a>
+            
+          
+        
+          
+        
+          
+        
+          
+            
+              <a href="https://www.zhihu.com/people/tao-chi-di-qiu-93" target="_blank" class="mr-2 w-8 h-8 inline-flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast">
+                <i class="ri-zhihu-line"></i>
+              </a>
+            
+          
+        
+          
+        
+          
+            
+              <a href="https://t.me/MikeYang626/" target="_blank" class="mr-2 w-8 h-8 inline-flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast">
+                <i class="ri-telegram-line"></i>
+              </a>
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+              <a href="tencent://message/?uin=2894603057" target="_blank" class="mr-2 w-8 h-8 inline-flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast">
+                <i class="ri-qq-line"></i>
+              </a>
+            
+          
+        
+      </div>
+    
+  </div>
+  <div class="md:mx-8 flex-shrink-0 self-start rounded-full border-4 border-dotted border-transparent hover:border-yellow-50 p-2 w-32 h-32 order-1 md:order-2 mx-auto s3-dotted">
+    <img class="rounded-full object-cover" src="https://yangqianrui.github.io/images/avatar.png?v=1615204143523" alt="逃离地球的博客" width="100%" height="100%">
+  </div>
+</header>
+      
+
+      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+        
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+      <i class="ri-star-line text-orange-200 absolute text-2xl left-0 ml-1 rotate-90"></i>
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/valuable-questions/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          逃离地球的做题记录
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-03-26</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>这个表格记录了我做过的一些觉得不错的题，不定期更新。🙃</p>
+
+      </div>
+      <a href="https://yangqianrui.github.io/post/valuable-questions/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s1.ax1x.com/2020/05/18/YheRWd.png" alt="逃离地球的做题记录">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/solution-p2476/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          着色方案 题解
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2021-02-22</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        题目链接
+题意
+nnn 个小球，mmm 种颜色，第 iii 种颜色有 cic_ici​ 个，保证 ∑ci=n\sum c_i=n∑ci​=n，问有多少种染色方案，使得任意两个相邻小球颜色不同。
+
+题解
+这道题有多种方法，都具有一定的启发性，...
+      </div>
+      <a href="https://yangqianrui.github.io/post/solution-p2476/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/CF865D-Solution/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Buy Low Sell High 题解
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-11-14</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>前几天校内考试里出现了一道反悔贪心的题，我发现我还不太会这个知识点，于是来学一下。这题是反悔贪心的模板题。</p>
+
+      </div>
+      <a href="https://yangqianrui.github.io/post/CF865D-Solution/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/AFO-in-CSP-S-2020/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          CSP-S 2020 退役记
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-10-18</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        博主是 BJ OIer，今年高一。
+初赛 Day 0
+做了一波洛谷的初赛卷子，得了 95 pts，感觉还行。
+希望今年能考出一个能让自己满意的成绩，不辜负一年的努力吧。。。
+初赛 Day 1
+上午 9:30 在首师附才达楼 316 考试，本...
+      </div>
+      <a href="https://yangqianrui.github.io/post/AFO-in-CSP-S-2020/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="data:image/png;base64,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" alt="CSP-S 2020 退役记">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/UVA12991-solution/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Game Rooms 题解
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-09-12</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        题目链接
+简要题意
+一个 NNN（N≤4000N\le4000N≤4000）层的大楼，每层只有一个游戏室，可以设置一个乒乓球桌或游泳池。第 iii 层有 TiT_iTi​ 个人喜欢乒乓球和 PiP_iPi​ 个人喜欢游泳。 现在要求使每个人...
+      </div>
+      <a href="https://yangqianrui.github.io/post/UVA12991-solution/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/CF280C-Solution/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Game on Tree 题解
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-07-18</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>这题感觉其他的题解写的都不是很清楚（也可能是因为我太弱），导致我并没有看懂。我于是请教了 THU 学长 <a href="https://www.luogu.com.cn/user/62308">Mr_Wu</a>，然后他用了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>10</mn><mrow><mo>−</mo><mn>10</mn></mrow></msup></mrow><annotation encoding="application/x-tex">{10}^{-10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.848448em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord">1</span><span class="mord">0</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.848448em;"><span style="top:-3.09734em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span> 秒就切了这道题，并且教会了我。</p>
+
+      </div>
+      <a href="https://yangqianrui.github.io/post/CF280C-Solution/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/Number-Theory-Learning-Notes/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          数论学习笔记
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-07-14</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>由于我数学一直很差，OI 里的数论就没怎么学过，所以就想系统地学一下，并写一篇博客进行总结。</p>
+
+      </div>
+      <a href="https://yangqianrui.github.io/post/Number-Theory-Learning-Notes/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://pic2.zhimg.com/v2-9103be7904a94f4497f6c9a238ef882d_1200x500.jpg" alt="数论学习笔记">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/cdq-Partition-Learning-Notes/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          三维偏序学习笔记
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-07-03</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>本来早就想写了，但文化课要考试，所以就拖到现在了😵</p>
+
+      </div>
+      <a href="https://yangqianrui.github.io/post/cdq-Partition-Learning-Notes/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/Heavy-Path-Decomposition/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          树链剖分
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-05-08</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        老师让我讲树剖，所以我就做了个幻灯片。不方便在这里放，所以我就发布到了我的github page上。
+链接在这
+...
+      </div>
+      <a href="https://yangqianrui.github.io/post/Heavy-Path-Decomposition/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://oi-wiki.org/graph/images/hld.png" alt="树链剖分">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://yangqianrui.github.io/post/Convex-Hull-Optimisation-Learning-Notes/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          斜率优化学习笔记
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-04-23</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>此博客仅仅介绍斜率优化的概念，没有例题和代码，是入门内容。</p>
+
+      </div>
+      <a href="https://yangqianrui.github.io/post/Convex-Hull-Optimisation-Learning-Notes/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s1.ax1x.com/2020/05/21/Yb5wh8.png" alt="斜率优化学习笔记">
+    
+  </div>
+  
+      </div>
+
+      
+  <div class="my-4 flex justify-between px-4 md:px-0">
+    
+    
+      <a href="https://yangqianrui.github.io/page/2" class="btn btn-white">
+        下一页
+        <i class="ri-arrow-right-line ml-4"></i>
+      </a>
+    
+  </div>
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <script async src=" //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</footer>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://yangqianrui.github.io/media/scripts/main.js"></script>
+</body>
+
+</html>

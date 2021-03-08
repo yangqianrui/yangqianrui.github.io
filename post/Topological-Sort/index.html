@@ -1,0 +1,481 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>拓扑排序 - 逃离地球的博客</title>
+<link rel="shortcut icon" href="https://yangqianrui.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://yangqianrui.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://yangqianrui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="拓扑排序 - 逃离地球的博客 - Atom Feed" href="https://yangqianrui.github.io/atom.xml">
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158963700-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-158963700-1');
+  </script>
+    
+
+  <meta name="description" content="这篇博客将向大家介绍如何利用拓扑排序判断一个有向图是否有环。
+
+
+题面：
+题目描述
+在一个有向图中，判断是否存在一个简单有向回路
+输入
+输入第一行为n和m，表示n个顶点，m条边，接下来有m行，每行vi和vj，表示从vi到vj有一条弧
+输出
+..." />
+  <meta property="og:title" content="拓扑排序 - 逃离地球的博客">
+  <meta property="og:description" content="这篇博客将向大家介绍如何利用拓扑排序判断一个有向图是否有环。
+
+
+题面：
+题目描述
+在一个有向图中，判断是否存在一个简单有向回路
+输入
+输入第一行为n和m，表示n个顶点，m条边，接下来有m行，每行vi和vj，表示从vi到vj有一条弧
+输出
+..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://yangqianrui.github.io/post/Topological-Sort/" />
+  <meta property="og:image" content="https://subetter.com/images/figures/20190525_01.png?imageView2/2/h/1921/q/75">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="拓扑排序 - 逃离地球的博客">
+  <meta name="twitter:description" content="这篇博客将向大家介绍如何利用拓扑排序判断一个有向图是否有环。
+
+
+题面：
+题目描述
+在一个有向图中，判断是否存在一个简单有向回路
+输入
+输入第一行为n和m，表示n个顶点，m条边，接下来有m行，每行vi和vj，表示从vi到vj有一条弧
+输出
+...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://yangqianrui.github.io/post/Topological-Sort/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+    <link rel="stylesheet" href="https://yangqianrui.github.io/media/css/prism-synthwave84.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://yangqianrui.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      逃离地球的博客
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          拓扑排序
+        </h1>
+        
+          <img src="https://subetter.com/images/figures/20190525_01.png?imageView2/2/h/1921/q/75" alt="拓扑排序" class="block w-full mb-8">
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2020-02-24 · 9 min read</div>
+          
+            <a href="https://yangqianrui.github.io/tag/Y0_ZzB2H8/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              学习笔记
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>这篇博客将向大家介绍如何利用拓扑排序判断一个有向图是否有环。</p>
+<!-- more -->
+<hr>
+<h3 id="题面">题面：</h3>
+<h5 id="题目描述">题目描述</h5>
+<p>在一个有向图中，判断是否存在一个简单有向回路</p>
+<h3 id="输入">输入</h3>
+<p>输入第一行为n和m，表示n个顶点，m条边，接下来有m行，每行vi和vj，表示从vi到vj有一条弧</p>
+<h3 id="输出">输出</h3>
+<p>输出文件为一行，若图中有简单有向回路，则输出“circle”，若没有，则输出“no circle”</p>
+<hr>
+<p>我将向大家展示如何<strong>不用任何STL</strong>完成这道题（主要是忘了怎么用233）</p>
+<p>在此特别感谢<a href="https://www.luogu.org/space/show?uid=63956">张怡和巨佬</a>的友情帮助（花了一个小时帮我改bug）</p>
+<p>废话不多说，正式开始题解</p>
+<p>第一步是建树，用邻接表来做 <s>邻接表有四样写法，你知道么</s>，这个就不多说了，直接上代码吧，我用的是超级容易错的结构体指针。</p>
+<pre><code class="language-cpp">struct node {
+    int v;       //指向的节点
+    node *next;  //下一条边
+    node() {
+        v = -1;
+        next = NULL;
+    }
+} * head[1000];  //邻接表
+
+void set() {
+    for (int i = 1; i &lt;= n; i++) head[i] = new node;
+    for (int i = 1; i &lt;= m; i++) {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        p[y]++;
+        if (head[x]-&gt;v == -1) {  //是空节点
+            head[x]-&gt;v = y;
+        } else {
+            node *pnew = new node;
+            pnew-&gt;v = y;
+            pnew-&gt;next = head[x];
+            head[x] = pnew;
+        }  //插入新的节点
+    }
+}
+</code></pre>
+<p>然后就是这道题的核心——用拓扑排序判断是否有环了。</p>
+<p>首先介绍一下拓扑排序（来自百度百科，可以不看）：对一个有向无环图(Directed Acyclic Graph，简称DAG)G进行拓扑排序，是将G中所有顶点排成一个线性序列，使得图中任意一对顶点u和v，若边(u,v)∈E(G)，则u在线性序列中出现在v之前。通常，这样的线性序列称为满足拓扑次序(Topological Order)的序列，简称拓扑序列。简单的说，由某个集合上的一个偏序得到该集合上的一个全序，这个操作称之为拓扑排序。</p>
+<p>说人话就是：把一个有向无环图的所有节点按照某种顺序排列，使得所有节点指向的节点都在这个节点之后</p>
+<p>还是看不懂的话看这个图就懂了：</p>
+<p>假设这是神犇<a href="https://www.luogu.org/space/show?uid=62308">Mr_Wu</a>某一天的时间规划表（若节点A指向节点B则表明Mr_Wu做节点B这件事前必须先做节点A中的事，如Mr_Wu在刷黑题之前必须提交检讨书解封）<br>
+<img src="https://i.loli.net/2020/02/26/zyILWqcGHExfwp3.png" alt="Mr_Wu的规划表" loading="lazy"></p>
+<p>那么我们这时用拓扑排序算法就能很容易地帮助Mr_Wu把一天要做的事情排个序，排序结果如下图（排序方法不唯一）</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/02/26/8jBsWbUImq5i6vF.png" alt="Mr_Wu要做的事情排序" loading="lazy"></figure>
+<p>说完拓扑排序的功能，现在来说一下算法的实现。</p>
+<p>我们来观察一下这副图，不难发现如果A指向B，那么做B这件事的条件就是完成A。我们可以把每条指向B的边都看做B的先决条件，有多少条边指向B，即B入度为几，做B这件事就有几个条件。</p>
+<p>我们要做的第一件事一定是不需要做任何其他事情就能直接做的，换句话来说，就是入度为0的节点。我们发现，不需要做任何事情就可以起床，即“起床”这个节点的入度入度为零。我们就可以把“起床”放在我们时间规划表的第一项了。</p>
+<p>所以拓扑排序的第一步就是要在所有的节点当中搜索入度为0的节点，放在排序结果数组的第一项。</p>
+<p>Mr_Wu起床之后不做任何其他事情就可以打开电脑或奥精测了，这时，我们可以发现“打开电脑”和“打开奥精测”这两个节点都没有先决条件了，但是这两个节点的入度并不为零，这是因为指向这两个节点的“起床”节点已经完成，那么“起床”指向“打开电脑”的这条边就不再是“打开电脑”的先决条件了，所以我们可以把这条边看成一条“失效的”边。</p>
+<p>我们就可以把“起床”指向“打开电脑”与指向“打开奥精测”的这两条“失效的”边删除了。而“起床”这件事已经做过，而且它的所有边都已被删除，所以我们就可以把“起床”这个节点一并删除。</p>
+<p>拓扑排序的第二步即为把做过的节点与所有以做过的节点为起点的边全部删除。</p>
+<p>删除后这个图就变成了这样：<br>
+<img src="https://i.loli.net/2020/02/26/jzgGNOKfu87mir3.png" alt="删除后的图" loading="lazy"></p>
+<p>这时我们发现“打开电脑”和“打开奥精测”两个节点的入度都是0了，我们可以任选其一，将它加入时间规划表的第二项，并删除那个节点和以那个节点为起点的边。</p>
+<p>接下来便重复上一步的动作，以此类推，直到把所有的节点都加入时间规划表中即可。</p>
+<hr>
+<p>那么是否有优化的方法呢？答案是：当然有。</p>
+<p>我们发现，上面的算法每次都要遍历一遍所有的节点，查找入度为0的节点，十分浪费时间。所以我们可以建立一个队列（队列我还是没有用STL），在最开始进行一次遍历，存储所有边的入度，并将所有入度为零的节点入队，然后每次都删除队首的节点，并在删除边时直接统计每条边的入度，并把入队为零的节点入队即可。</p>
+<hr>
+<p>那说了这么多，拓扑排序到底和判断一个有向图是否有环有何关系呢？<s>没有关系</s></p>
+<p>再来看一眼我刚才粘上来的百度百科：对一个<strong>有向无环图</strong>(Directed Acyclic Graph，简称DAG)G进行拓扑排序，是将G中所有顶点排成一个线性序列，使得图中任意一对顶点u和v，若边(u,v)∈E(G)，则u在线性序列中出现在v之前。通常，<strong>这样的线性序列称为满足拓扑次序(Topological Order)的序列</strong>，简称拓扑序列。简单的说，由某个集合上的一个偏序得到该集合上的一个全序，这个操作称之为拓扑排序。</p>
+<p>注意加粗的部分，拓扑排序就是把一个有向无环图排列成拓扑序列。换句话说，一个有环图就无法通过拓扑排序把所有的节点排成拓扑序列。</p>
+<p>举个栗子，Mr_Wu由于在学完数学后十分劳累，所以他决定刷几道黑题放松一下。但他由于使用自动注销机注销了自己，被洛谷封号，所以他需要写检讨来解封，但他太累了以至于必须要刷几道黑题来放松一下……<br>
+<img src="https://cdn.luogu.org/upload/pic/54137.png" alt="我也不知道我为什么要放这张图片" loading="lazy"></p>
+<p>那么“写检讨”和“刷黑题”两个节点就形成了一个环。这两个节点的入度都是1.永远不会有一个节点会完成。那么如果这幅图（即这两个节点）是另一幅图的子图，那么另一个图拓扑排序结束后（入度为零的队列为空）这两个节点将不会被排序进拓扑序列中。</p>
+<p>所以我们可以用一个变量来记录现在拓扑序列中的节点的个数，如果排序后节点个数等于图中的节点个数，即图中的所有节点都在拓扑序列中，那么这个图就没有环。如果拓扑序列中的节点的个数小于图中的节点数，那么就说明这幅图有环。</p>
+<p>那么上代码吧：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+int n, m, p[10000] = {0};
+struct node {
+    int v;       //指向的节点
+    node *next;  //下一条边
+    node() {
+        v = -1;
+        next = NULL;
+    }
+} * head[1000];  //邻接表
+
+void set() {  //建图
+    for (int i = 1; i &lt;= n; i++) head[i] = new node;
+    for (int i = 1; i &lt;= m; i++) {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        p[y]++;
+        if (head[x]-&gt;v == -1) {  //是空节点
+            head[x]-&gt;v = y;
+        } else {
+            node *pnew = new node;
+            pnew-&gt;v = y;
+            pnew-&gt;next = head[x];
+            head[x] = pnew;
+        }  //插入新的节点
+    }
+}
+int topsort() {  //拓扑排序
+    int queue[1000] = {0}, front = 0, rear = 0, cnt = 0;
+    for (int i = 1; i &lt;= n; i++) {
+        if (p[i] == 0) {
+            queue[rear++] = i;
+        }
+    }                        //第一次遍历
+    while (front != rear) {  //队列不为空
+        int m = queue[front++];
+        if (m == 0) {
+            break;
+        }  // m为队首，即要删除的节点的编号
+        node *a = head[m];
+        while (1) {
+            if (--p[a-&gt;v] == 0) {
+                queue[rear++] = a-&gt;v;
+            }                          //删边后入度为0的节点入队
+            if (a-&gt;next == NULL) {     //到头了
+                head[m]-&gt;next = NULL;  //删除节点
+                cnt++;
+                break;
+            }
+            a = a-&gt;next;  //下一条边
+        }
+    }
+    return cnt;
+}
+int main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    set();
+    if (topsort() &lt; n) {
+        cout &lt;&lt; &quot;circle&quot;;
+    } else {
+        cout &lt;&lt; &quot;no circle&quot;;
+    }
+    return 0;
+}
+
+</code></pre>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+        <div id="vlaine-comment"></div>
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  <script async src=" //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%A2%98%E9%9D%A2">题面：</a><br>
+*
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0">题目描述</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BE%93%E5%85%A5">输入</a></li>
+<li><a href="#%E8%BE%93%E5%87%BA">输出</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://yangqianrui.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+    <script src="https://yangqianrui.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+    <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'aurGAMEJahU106Ci5dfpSpCW-gzGzoHsz',
+    appKey: 'vL1mNpoGtVzMHaf6nLIIy1ni',
+    pageSize: 10,
+    notify: true,
+    avatar: 'mp',
+    verify: true,
+    placeholder: '来都来了，不妨评论一下',
+    visitor: true,
+    highlight: true,
+    recordIP: true,
+  })
+</script>
+  
+  
+</body>
+
+</html>
